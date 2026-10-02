@@ -23,6 +23,10 @@ button{font-family:inherit;cursor:pointer}.button{border:0}button:focus-visible{
 .call-dialog{border:1px solid var(--line);border-radius:28px;padding:44px;width:min(460px,calc(100% - 40px));max-height:calc(100dvh - 40px);overflow:auto;background:var(--sand);color:var(--ink);box-shadow:0 30px 90px rgba(0,0,0,.2)}.call-dialog::backdrop{background:rgba(20,20,20,.5);backdrop-filter:blur(5px)}.call-dialog h2{font-size:32px;line-height:1.25;margin:18px 0}.call-dialog p{font-size:14px;color:var(--muted)}.call-dialog .eyebrow{padding-right:25px}.dialog-close{position:absolute;top:16px;right:16px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--ink);font-size:25px;line-height:1}.call-icon{width:52px;height:52px;border-radius:50%;background:var(--sage);display:flex;align-items:center;justify-content:center;margin-top:10px}.call-number{display:block;font-size:clamp(22px,5.6vw,28px);font-weight:400;letter-spacing:-.01em;line-height:1.4;margin:27px 0 22px;white-space:nowrap}.call-dialog .button{width:100%;gap:14px}.call-dialog .person{padding-bottom:20px;border-bottom:1px solid var(--line)}.call-dialog .person strong{display:block;font-size:15px;font-weight:500;margin-bottom:5px}.call-dialog .person span{font-size:12px;color:var(--muted)}.call-dialog .hint{font-size:12px;line-height:1.6;margin:16px 0 0;text-align:center}
 @media(max-width:767px){.bank-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.bank-card{min-height:122px;padding:18px 12px;gap:12px}.bank-mark{width:118px;height:45px}.call-dialog{padding:34px 25px}.call-dialog h2{font-size:27px}.call-dialog .eyebrow{font-size:10px}}
 .legal-footer{max-width:1200px;margin:28px auto 0;padding-top:22px;border-top:1px solid rgba(20,20,20,.12);display:flex;flex-wrap:wrap;justify-content:center;gap:12px 28px;font-size:13px;line-height:1.6;color:#525252}.legal-footer a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}.legal-footer a:hover{text-decoration:underline;text-underline-offset:4px}.legal-footer a:focus-visible{outline:2px solid #525252;outline-offset:4px}@media(max-width:767px){.legal-footer{gap:4px 20px;padding-top:16px;font-size:12px}}
+
+.contents a{line-height:22px;transition:color .2s,font-size .2s,background-color .2s,border-color .2s}.contents a.is-active{font-weight:600;font-size:14px;color:var(--ink);border-bottom-color:var(--ink)}
+@media(max-width:767px){.contents a.is-active{font-size:14px;background:var(--sage);border-color:#A4B8B3}.contents a{transition:color .2s,background-color .2s,border-color .2s}}
+@media(prefers-reduced-motion:reduce){.contents a{transition:none}}
 </style>
 </head>
 <body>
@@ -100,6 +104,43 @@ button{font-family:inherit;cursor:pointer}.button{border:0}button:focus-visible{
   if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
  });
  dialog.addEventListener('close', () => { document.body.style.overflow = previousOverflow; });
+})();
+</script>
+
+<script>
+(() => {
+ const links = [...document.querySelectorAll('.contents nav a[href^="#"]')];
+ const sections = links.map(link => document.getElementById(link.hash.slice(1)));
+ let activeId = '';
+ let pending = false;
+ function updateActiveSection() {
+  pending = false;
+  const header = document.querySelector('.top');
+  const readingLine = (header ? header.getBoundingClientRect().height : 80) + Math.min(150, innerHeight * .2);
+  let active = sections[0];
+  for (const section of sections) {
+   if (section && section.getBoundingClientRect().top <= readingLine) active = section;
+  }
+  if (!active || active.id === activeId) return;
+  activeId = active.id;
+  links.forEach(link => {
+   const current = link.hash === '#' + activeId;
+   link.classList.toggle('is-active', current);
+   if (current) link.setAttribute('aria-current', 'location');
+   else link.removeAttribute('aria-current');
+  });
+ }
+ function scheduleUpdate() {
+  if (pending) return;
+  pending = true;
+  requestAnimationFrame(updateActiveSection);
+ }
+ addEventListener('scroll', scheduleUpdate, {passive:true});
+ addEventListener('resize', scheduleUpdate, {passive:true});
+ addEventListener('load', scheduleUpdate);
+ addEventListener('hashchange', scheduleUpdate);
+ if (document.fonts) document.fonts.ready.then(scheduleUpdate);
+ updateActiveSection();
 })();
 </script>
 </body></html>
