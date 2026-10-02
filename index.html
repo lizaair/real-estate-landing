@@ -107,6 +107,8 @@
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    @media (max-width: 767px) { #housing .housing-feature { padding: 28px 22px; gap: 36px; } }
+
     /* Shared layout constraints and comfortable anchor positioning. */
     section[id] { scroll-margin-top: 104px; }
     .grid > *, .mission-signature > * { min-width: 0; }
@@ -254,6 +256,7 @@
         <a href="#about" class="mobile-nav-link py-1 border-b border-black/5">Про мене</a>
         <a href="#services" class="mobile-nav-link py-1 border-b border-black/5">Послуги</a>
         <a href="#portfolio" class="mobile-nav-link py-1 border-b border-black/5">Об'єкти</a>
+        <a href="#housing" class="mobile-nav-link py-1 border-b border-black/5">єОселя та умови купівлі</a>
         <a href="#advantages" class="mobile-nav-link py-1 border-b border-black/5">Переваги</a>
         <a href="#reviews" class="mobile-nav-link py-1 border-b border-black/5">Відгуки</a>
         <a href="#contact" class="mobile-nav-link mt-2 text-center text-xs font-semibold py-3 rounded-full bg-noir-900 text-sand-50">Консультація рієлтора</a>
@@ -617,6 +620,31 @@
   </section>
 
   <!-- Section 03: Selected Properties / Обрані об'єкти -->
+  <!-- Housing purchase programmes -->
+  <section id="housing" class="py-20 px-4 md:px-10 max-w-7xl mx-auto">
+    <div class="housing-feature grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-16 rounded-[2rem] bg-sage-100/70 border border-noir-900/5 p-7 sm:p-10 lg:p-14">
+      <div class="flex flex-col items-start justify-between">
+        <div>
+          <span class="text-xs font-mono text-noir-500 uppercase tracking-widest block mb-5">єОселя / Доступне житло</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-noir-900 leading-tight mb-6">Своя оселя.<br>З підтримкою держави.</h2>
+          <p class="text-base text-noir-500 leading-relaxed max-w-lg">Пільгова іпотека для військових, ветеранів, ВПО та інших громадян. Допоможу розібратися в умовах і підібрати житло під вашу програму.</p>
+        </div>
+        <a href="/housing.html" class="inline-flex items-center justify-between gap-8 min-h-[48px] border-b border-noir-900/40 mt-8 pb-2 text-sm font-semibold hover:gap-12 smooth-transition">Дізнатися більше <span aria-hidden="true" class="text-2xl font-light">→</span></a>
+      </div>
+      <div class="flex flex-col justify-center">
+        <div class="border-b border-noir-900/15 pb-7 mb-6">
+          <div class="text-6xl sm:text-7xl font-light tracking-tight mb-3">3<span class="text-4xl">%</span></div>
+          <h3 class="text-lg font-medium mb-2">Також для мобілізованих</h3>
+          <p class="text-sm leading-relaxed text-noir-500">Контракт не обов’язковий. Ставка 3% діє перші 10 років, з 11-го року — 6%.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-6 text-noir-500 text-sm">
+          <div><span class="block text-2xl text-noir-900 font-light mb-2">До 20 років</span>строк кредитування</div>
+          <div><span class="block text-2xl text-noir-900 font-light mb-2">Від 20%</span>внесок; від 10% для молоді</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="portfolio" class="py-24 px-4 md:px-10 max-w-7xl mx-auto">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
       <div>
@@ -1112,6 +1140,7 @@
         <a href="#about" class="hover:text-noir-900 transition-colors">Про мене</a>
         <a href="#services" class="hover:text-noir-900 transition-colors">Послуги</a>
         <a href="#portfolio" class="hover:text-noir-900 transition-colors">Об'єкти</a>
+        <a href="/housing.html" class="hover:text-noir-900 transition-colors">єОселя</a>
         <a href="#contact" class="hover:text-noir-900 transition-colors">Контакти</a>
       </div>
 
