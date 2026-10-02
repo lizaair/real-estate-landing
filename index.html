@@ -223,7 +223,8 @@
 @media(max-width:767px){section.certificates-section{padding-top:20px;padding-bottom:56px}.certificates-heading{margin-bottom:24px}.certificates-grid{gap:14px}.certificate-card{border-radius:16px}.certificate-image{padding:8px}.certificate-info{padding:15px 12px}.certificate-tag{font-size:10px;letter-spacing:.04em;line-height:1.6}.certificate-name{font-size:14px;line-height:1.55;margin-bottom:15px}.certificate-view{font-size:11px;line-height:1.6}.certificate-expand{width:25px;height:25px;bottom:6px;right:6px;font-size:15px}.certificate-dialog{padding:14px}.certificate-dialog-heading h3{font-size:16px}}
 @media(prefers-reduced-motion:reduce){.certificate-card{transition:none}.certificate-card:hover{transform:none}}
 
-  </style>
+  .legal-footer{max-width:1200px;margin:28px auto 0;padding-top:22px;border-top:1px solid rgba(20,20,20,.12);display:flex;flex-wrap:wrap;justify-content:center;gap:12px 28px;font-size:13px;line-height:1.6;color:#525252}.legal-footer a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}.legal-footer a:hover{text-decoration:underline;text-underline-offset:4px}.legal-footer a:focus-visible{outline:2px solid #525252;outline-offset:4px}@media(max-width:767px){.legal-footer{gap:4px 20px;padding-top:16px;font-size:12px}}
+</style>
 </head>
 <body class="selection:bg-sage-200 selection:text-noir-900 overflow-x-hidden">
 
@@ -1046,7 +1047,7 @@
         <div class="lg:col-span-7">
           <div class="contact-form-panel glass-panel p-8 sm:p-10 rounded-3xl shadow-xl border border-white">
             <h3 class="text-xl font-medium text-noir-900 mb-2">Залишити запит на консультацію</h3>
-            <p class="text-xs text-noir-500 mb-6">Катерина зв'яжеться з вами протягом 20 хвилин у зручному месенджері.</p>
+            <p class="text-xs text-noir-500 mb-6">Для консультації зателефонуйте: <a href="tel:+380675128899" class="underline">+38 (067) 512-88-99</a>. Форма наразі не надсилає заявки.</p>
 
             <form id="leadForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
               <!-- Service Intent Selector -->
@@ -1125,22 +1126,22 @@
 
               <!-- Submission Button -->
               <button 
-                type="submit" 
+                type="button" onclick="handleFormSubmit(event)"
                 class="w-full py-4 rounded-xl bg-noir-900 text-sand-50 text-sm font-semibold hover:bg-noir-800 smooth-transition flex items-center justify-center gap-2 shadow-md shadow-noir-900/10"
               >
-                <span>Надіслати запит Катерині</span>
+                <span>Зв’язатися з Катериною</span>
                 <i data-lucide="send" class="w-4 h-4"></i>
               </button>
 
               <p class="text-[11px] text-center text-noir-400 pt-1">
-                Конфіденційність гарантовано. Ваші контакти не передаються третім особам.
+                Про використання даних — у <a href="/privacy.html" class="underline">Політиці конфіденційності</a>.
               </p>
             </form>
 
             <!-- Success Confirmation Box -->
-            <div id="formSuccessMessage" class="hidden mt-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs text-center">
-              <i data-lucide="check-circle-2" class="w-5 h-5 mx-auto mb-1 text-emerald-600"></i>
-              Дякуємо! Ваш запит успішно надіслано. Катерина зв'яжеться з вами найближчим часом.
+            <div id="formSuccessMessage" role="status" class="hidden mt-4 p-4 rounded-xl bg-sage-50 border border-sage-200 text-noir-800 text-sm text-center">
+              <i data-lucide="phone" class="w-5 h-5 mx-auto mb-1 text-noir-800"></i>
+              Форма наразі не надсилає заявки. Зателефонуйте Катерині: <a href="tel:+380675128899" class="underline font-semibold">+38 (067) 512-88-99</a>.
             </div>
 
           </div>
@@ -1172,11 +1173,11 @@
       </div>
 
       <div class="text-[11px] text-noir-400">
-        Editorial Swiss Real Estate Design
+        Нерухомість у Миколаєві
       </div>
 
     </div>
-  </footer>
+  <nav class="legal-footer" aria-label="Правова інформація"><a href="/privacy.html">Політика конфіденційності</a><a href="/terms.html">Умови користування</a><a href="/cookies.html">Cookies</a></nav></footer>
 
   <!-- Custom Modal Box -->
   <div id="propertyModal" class="fixed inset-0 z-50 hidden bg-noir-900/60 backdrop-blur-md flex items-center justify-center p-4">
@@ -1310,7 +1311,7 @@
       const successMsg = document.getElementById('formSuccessMessage');
       
       successMsg.classList.remove('hidden');
-      form.reset();
+
       lucide.createIcons();
 
       setTimeout(() => {
